@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
@@ -29,13 +28,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             CardBudgetTheme {
-                CardBudgetApp()
+                CardBudgetAppUI()
             }
         }
     }
 }
 
-// ─── Navigation ────────────────────────────────────────────
 sealed class Screen(val route: String, val label: String, val selectedIcon: ImageVector, val unselectedIcon: ImageVector) {
     object Home : Screen("home", "홈", Icons.Filled.Home, Icons.Outlined.Home)
     object Transactions : Screen("transactions", "내역", Icons.Filled.List, Icons.Outlined.List)
@@ -46,7 +44,7 @@ sealed class Screen(val route: String, val label: String, val selectedIcon: Imag
 val bottomNavItems = listOf(Screen.Home, Screen.Transactions, Screen.Cards, Screen.Notifications)
 
 @Composable
-fun CardBudgetApp() {
+fun CardBudgetAppUI() {
     var permissionsGranted by remember { mutableStateOf(false) }
 
     if (!permissionsGranted) {
